@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: SpaceX Rocket API
+  description: An API to retrieve data about SpaceX rockets
+  version: 1.0.0
+servers:
+  - url: https://api.spacexdata.com/v3
+paths:
+  /rockets/{rocket_id}:
+    get:
+      summary: Get details of a specific rocket by ID
+      description: Retrieves information about a specific rocket based on its ID.
+      parameters:
+        - name: rocket_id
+          in: path
+          description: The ID of the rocket to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rocket'
+        '404':
+          description: Rocket not found
+          content:
+            application/json:
+              example:
+                error: Rocket not found
